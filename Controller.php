@@ -204,7 +204,7 @@ class Controller extends \MapasCulturais\Controllers\Registration
         $csv = Reader::createFromStream($stream);
 
         //Define o limitador do arqivo (, ou ;)
-        // $csv->setDelimiter(";");
+        $csv->setDelimiter(";");
 
         //Seta em que linha deve se iniciar a leitura
         $header_temp = $csv->setHeaderOffset(0);
@@ -225,9 +225,8 @@ class Controller extends \MapasCulturais\Controllers\Registration
             $header_file[] = $value;
             break;
         }
-        
-
         $columns = '"' . implode('", "', $this->columns) . '"';
+
         foreach ($this->columns as $column) {
             if (!isset($header_file[0][$column])) {
                 die("As colunas {$columns} são obrigatórias");
@@ -249,6 +248,22 @@ class Controller extends \MapasCulturais\Controllers\Registration
             $obs_padrao = '';
 
             switch(strtolower($eval)){
+                case 'homologado':
+                case 'homologada':
+                    $result = 'homogada por recurso';
+                    $obs_padrao = 'Recurso deferido';
+                break;
+
+                case 'em analise':
+                case 'em análise':
+                case 'analise':
+                case 'análise':
+                case 'recebido':
+                case 'recebida':
+                    $result = 'recurso em análise';
+                    $obs_padrao = 'Recurso recebido e em análise';
+                break;
+            
                 case 'deferido':
                 case 'deferida':
                 case 'aprovado':
