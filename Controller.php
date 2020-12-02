@@ -250,7 +250,7 @@ class Controller extends \MapasCulturais\Controllers\Registration
             switch(strtolower($eval)){
                 case 'homologado':
                 case 'homologada':
-                    $result = 'homogada por recurso';
+                    $result = $this->config['result_homologada'];
                     $obs_padrao = 'Recurso deferido';
                 break;
 
@@ -260,7 +260,7 @@ class Controller extends \MapasCulturais\Controllers\Registration
                 case 'análise':
                 case 'recebido':
                 case 'recebida':
-                    $result = 'recurso em análise';
+                    $result = $this->config['result_analise'];
                     $obs_padrao = 'Recurso recebido e em análise';
                 break;
             
@@ -270,7 +270,7 @@ class Controller extends \MapasCulturais\Controllers\Registration
                 case 'aprovada':
                 case 'selecionado':
                 case 'selecionada':
-                    $result = '10';
+                    $result = $this->config['result_selecionada'];
                     $obs_padrao = 'Recurso deferido';
                 break;
 
@@ -280,7 +280,7 @@ class Controller extends \MapasCulturais\Controllers\Registration
                 case 'inválido':
                 case 'invalida':
                 case 'inválida':
-                    $result = '2';
+                    $result = $this->config['result_invalida'];
                     $obs_padrao = 'Recurso negado';
                 break;
 
@@ -290,12 +290,12 @@ class Controller extends \MapasCulturais\Controllers\Registration
                 case 'nao selecionado':
                 case 'não selecionada':
                 case 'nao selecionada':
-                    $result = '3';
+                    $result = $this->config['result_nao_selecionada'];
                     $obs_padrao = 'Recurso indeferido';
                 break;
                 
                 case 'suplente':
-                    $result = '8';
+                    $result = $this->config['result_suplente'];
                     $obs_padrao = 'Recurso: inscrição suplente';
                 break;
                 

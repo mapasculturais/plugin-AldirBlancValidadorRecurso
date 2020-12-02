@@ -18,6 +18,25 @@ class Plugin extends \AldirBlanc\PluginValidador
 
             // se true, só exporta as inscrições 
             'exportador_requer_validacao' => [],
+
+            'result_homologada' => 'homologada',
+            'obs_homologada' => 'Recurso deferido',
+            
+            'result_analise' => 'recurso em análise',
+            'obs_analise' => 'Recurso recebido e em análise',
+            
+            'result_selecionada' => 'selecionada por recurso',
+            'obs_selecionada' => 'Recurso deferido',
+            
+            'result_invalida' => '2',
+            'obs_invalida' => 'Recurso negado',
+            
+            'result_nao_selecionada' => '3',
+            'obs_nao_selecionada' => 'Recurso indeferido',
+            
+            'result_suplente' => '8',
+            'obs_suplente' => 'Recurso: inscrição suplente',
+            
         ];
         $this->_config = $config;
         parent::__construct($config);
