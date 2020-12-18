@@ -335,8 +335,8 @@ class Controller extends \MapasCulturais\Controllers\Registration
                 $evaluation->evaluationData = ['status' => $result, "obs" => $obs];
             } else {
                 $data = $evaluation->evaluationData;
-                $data['status'] = $result;
-                $data['obs'] .= "\n================\n\n{$obs}";
+                $data->status = $result;
+                $data->obs .= "\n================\n\n{$obs}";
 
                 $evaluation->evaluationData = $data;
             }
