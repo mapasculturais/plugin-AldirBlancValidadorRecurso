@@ -49,23 +49,17 @@ class Plugin extends \AldirBlanc\PluginValidador
         $plugin_aldirblanc = $app->plugins['AldirBlanc'];
         $plugin_validador = $this;
 
-        $inciso1Ids = [$plugin_aldirblanc->config['inciso1_opportunity_id']];
-        $inciso2Ids = array_values($plugin_aldirblanc->config['inciso2_opportunity_ids']);
-        $inciso3Ids = is_array($plugin_aldirblanc->config['inciso3_opportunity_ids']) ? $plugin_aldirblanc->config['inciso3_opportunity_ids'] : [];
-        
-        $opportunities_ids = array_merge($inciso1Ids, $inciso2Ids, $inciso3Ids);
+        $opportunities_ids = $this->getOpportunitiesIds();
 
         // uploads de CSVs 
         $app->hook('template(opportunity.<<single|edit>>.sidebar-right):end', function () use($opportunities_ids, $plugin_aldirblanc, $plugin_validador) {
             $opportunity = $this->controller->requestedEntity; 
-            if ($opportunity->canUser('@control') && in_array($opportunity->id, $opportunities_ids)) {
-                if($opportunity->canUser('@control')){
-                    $this->part('validador-recursos/validador-uploads', ['entity' => $opportunity, 'plugin_aldirblanc' => $plugin_aldirblanc, 'plugin_validador' => $plugin_validador]);
-                }
+            if(in_array($opportunity->id, $opportunities_ids) && $opportunity->canUser('@control')){
+                $this->part('validador-recursos/validador-uploads', ['entity' => $opportunity, 'plugin_aldirblanc' => $plugin_aldirblanc, 'plugin_validador' => $plugin_validador]);
             }
         });
 
-                /**
+        /**
          * @TODO: implementar para metodo de avaliação documental
          */
         $app->hook('entity(Registration).consolidateResult', function(&$result, $caller) use($plugin_validador, $app) {
