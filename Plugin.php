@@ -63,6 +63,7 @@ class Plugin extends \AldirBlanc\PluginValidador
          * @TODO: implementar para metodo de avaliação documental
          */
         $app->hook('entity(Registration).consolidateResult', function(&$result, $caller) use($plugin_validador, $app) {
+            if(!$caller){return;}
             if ($recurso = $app->repo('RegistrationEvaluation')->findOneBy(['registration' => $caller->registration, 'user' => $plugin_validador->getUser()])) {
                 $result = $caller->result;
             }
